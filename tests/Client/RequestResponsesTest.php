@@ -32,36 +32,21 @@ abstract class RequestResponsesTest extends TestCase
     /**
      * @var string[]
      */
-    protected static $namespaces = ['http://www.example.org/test/' => 'Ex'];
-    /**
-     * @var Generator
-     */
-    protected static $generator;
+    protected static array $namespaces = ['http://www.example.org/test/' => 'Ex'];
+    protected static Generator $generator;
 
-    /**
-     * @var MockHandler
-     */
-    protected $responseMock;
+    protected MockHandler $responseMock;
 
     /**
      * @var array
      */
-    protected $requestResponseStack = [];
+    protected array $requestResponseStack = [];
 
-    /**
-     * @var Client
-     */
-    protected $client;
+    protected Client $client;
 
-    /**
-     * @var ClientFactory
-     */
-    protected $factory;
+    protected ClientFactory $factory;
 
-    /**
-     * @var HandlerRegistryInterface
-     */
-    protected $handlerRegistry;
+    protected HandlerRegistryInterface $handlerRegistry;
 
     public static function setUpBeforeClass(): void
     {

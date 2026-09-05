@@ -19,22 +19,10 @@ use Laminas\Code\Generator\DocBlockGenerator;
 
 class ClientStubGenerator
 {
-    /**
-     * @var NamingStrategy
-     */
-    private $namingStrategy;
-    /**
-     * @var PhpConverter
-     */
-    private $phpConverter;
-    /**
-     * @var bool
-     */
-    private $unwrapReturn = false;
-    /**
-     * @var Inflector
-     */
-    private $inflector;
+    private NamingStrategy $namingStrategy;
+    private PhpConverter $phpConverter;
+    private bool $unwrapReturn = false;
+    private Inflector $inflector;
 
     public function __construct(PhpConverter $phpConverter, NamingStrategy $namingStrategy, bool $unwrapReturn = false, array $baseNs = [])
     {

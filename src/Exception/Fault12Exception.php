@@ -10,10 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class Fault12Exception extends FaultException
 {
-    /**
-     * @var Fault
-     */
-    private $fault;
+    private Fault $fault;
 
     private function __construct(Fault $fault, ResponseInterface $response, RequestInterface $request, ?\Throwable $previous = null)
     {

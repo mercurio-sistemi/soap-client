@@ -15,29 +15,14 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 class ClientFactory
 {
-    /**
-     * @var SerializerInterface
-     */
-    protected $serializer;
-    /**
-     * @var RequestFactoryInterface
-     */
-    protected $messageFactory;
+    protected SerializerInterface $serializer;
+    protected ?RequestFactoryInterface $messageFactory = null;
 
-    /**
-     * @var ClientInterface
-     */
-    protected $httpClient;
+    protected ?ClientInterface $httpClient = null;
 
-    /**
-     * @var MetadataLoaderInterface
-     */
-    private $reader;
+    private MetadataLoaderInterface $reader;
 
-    /**
-     * @var StreamFactoryInterface
-     */
-    private $streamFactory;
+    private ?StreamFactoryInterface $streamFactory = null;
 
     public function __construct(MetadataLoaderInterface $reader, SerializerInterface $serializer)
     {
