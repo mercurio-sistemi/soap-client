@@ -5,12 +5,17 @@ on:
   pull_request:
 
 jobs:
+  # PHP 7.4/8.0 esclusi: laminas/laminas-code ^4.8 (require diretto) non ha
+  # nessuna versione compatibile sotto PHP 8.1. Nessun job "prefer-lowest":
+  # jms/serializer ^1.6 (il floor piu' basso ammesso) usa "readonly" come
+  # identificatore, riservato da PHP 8.1, quindi non esiste una versione PHP
+  # compatibile sia con quel floor sia con il floor di laminas/laminas-code.
   phpunit:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        php: ['8.1', '8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -18,17 +23,6 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
       - run: composer update --no-interaction --no-progress
-      - run: vendor/bin/phpunit
-
-  phpunit-lowest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-          coverage: none
-      - run: composer update --no-interaction --no-progress --prefer-lowest --prefer-stable
       - run: vendor/bin/phpunit
 
   phpcs:
