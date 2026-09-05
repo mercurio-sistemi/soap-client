@@ -19,7 +19,7 @@ class MethodTag extends BaseMethodTag
     /**
      * @var array
      */
-    protected $params = [];
+    protected array $params = [];
 
     public function setParams(array $params): void
     {

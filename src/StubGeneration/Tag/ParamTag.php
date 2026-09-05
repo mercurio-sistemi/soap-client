@@ -14,15 +14,9 @@ use Laminas\Code\Generator\DocBlock\Tag\ParamTag as ParamTagTag;
 
 class ParamTag extends ParamTagTag
 {
-    /**
-     * @var string
-     */
-    protected $default;
+    protected string $default;
 
-    /**
-     * @var string
-     */
-    protected $varidic = false;
+    protected bool $varidic = false;
 
     public function setDefault(string $default): void
     {

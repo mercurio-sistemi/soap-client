@@ -7,6 +7,7 @@ namespace GoetasWebservices\SoapServices\SoapClient\Tests\Client;
 use Ex\GetMultiParam;
 use Ex\GetReturnMultiParam;
 use Ex\GetReturnMultiParamResponse;
+use Ex\SoapEnvelope12\Messages\GetSimpleInput;
 use GoetasWebservices\SoapServices\Metadata\Envelope\Fault as FaultBase;
 use GoetasWebservices\SoapServices\Metadata\Envelope\SoapEnvelope12\Messages\Fault;
 use GoetasWebservices\SoapServices\Metadata\Generator\MetadataGenerator;
@@ -401,18 +402,20 @@ class Client12RequestResponsesTest extends RequestResponsesTest
         }
     }
 
-    public function testSerializerContextParametersAreAdded()
+    public function testSerializerContextParametersAreAdded(): void
     {
-        $this->handlerRegistry->registerHandler(GraphNavigator::DIRECTION_SERIALIZATION, \Ex\SoapEnvelope12\Messages\GetSimpleInput::class, 'xml',
-            function($visitor, \Ex\SoapEnvelope12\Messages\GetSimpleInput $obj, array $type, Context $context) {
-
+        $this->handlerRegistry->registerHandler(
+            GraphNavigator::DIRECTION_SERIALIZATION,
+            GetSimpleInput::class,
+            'xml',
+            function ($visitor, GetSimpleInput $obj, array $type, Context $context): void {
                 $this->assertTrue($context->hasAttribute('soapEndpoint'), 'The "soapEndpoint" attribute was not found on the context object');
                 $this->assertEquals('http://www.example.org/12', $context->getAttribute('soapEndpoint'));
 
                 $this->assertTrue($context->hasAttribute('soapOperation'), 'The "soapOperation" attribute was not found on the context object');
                 $this->assertTrue(
                     is_array($context->getAttribute('soapOperation')),
-                    'The "soapOperation" attribute is not of type array, but '.gettype($context->getAttribute('soapOperation'))
+                    'The "soapOperation" attribute is not of type array, but ' . gettype($context->getAttribute('soapOperation'))
                 );
                 $this->assertEquals('http://www.example.org/test/getSimple', $context->getAttribute('soapOperation')['action']);
 
@@ -428,5 +431,3 @@ class Client12RequestResponsesTest extends RequestResponsesTest
         $client->getSimple('foo');
     }
 }
-
-class SerializerHandlerAssertionsWereExecuted extends \Exception {};

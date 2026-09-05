@@ -9,15 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class ServerException extends SoapException
 {
-    /**
-     * @var RequestInterface
-     */
-    private $request;
+    private RequestInterface $request;
 
-    /**
-     * @var ResponseInterface
-     */
-    private $response;
+    private ResponseInterface $response;
 
     public function __construct(string $message, ResponseInterface $response, RequestInterface $request, ?\Throwable $previous = null)
     {

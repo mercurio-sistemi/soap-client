@@ -17,10 +17,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class BuildClientTest extends TestCase
 {
-    /**
-     * @var ClientFactory
-     */
-    protected $factory;
+    protected ClientFactory $factory;
 
     public function setUp(): void
     {

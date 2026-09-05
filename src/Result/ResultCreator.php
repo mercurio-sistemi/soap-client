@@ -10,14 +10,8 @@ use Metadata\PropertyMetadata;
 
 class ResultCreator implements ResultCreatorInterface
 {
-    /**
-     * @var bool
-     */
-    private $unwrap = false;
-    /**
-     * @var Serializer
-     */
-    private $serializer;
+    private bool $unwrap = false;
+    private Serializer $serializer;
 
     public function __construct(Serializer $serializer, bool $unwrap = false)
     {

@@ -29,60 +29,35 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 class Client
 {
-    /**
-     * @var SerializerInterface
-     */
-    protected $serializer;
+    protected SerializerInterface $serializer;
     /**
      * @var array
      */
-    protected $serviceDefinition;
+    protected array $serviceDefinition;
 
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
+    protected ClientInterface $client;
 
-    /**
-     * @var RequestFactoryInterface
-     */
-    protected $messageFactory;
+    protected RequestFactoryInterface $messageFactory;
 
 
-    /**
-     * @var StreamFactoryInterface
-     */
-    protected $streamFactory;
+    protected StreamFactoryInterface $streamFactory;
 
 
-    /**
-     * @var ResultCreatorInterface
-     */
-    private $resultCreator;
+    private ResultCreatorInterface $resultCreator;
 
-    /**
-     * @var ArgumentsReaderInterface
-     */
-    private $argumentsReader;
+    private ArgumentsReaderInterface $argumentsReader;
 
-    /**
-     * @var bool
-     */
-    private $debug = false;
+    private bool $debug = false;
 
     /**
      * Debug
-     *
-     * @var RequestInterface
      */
-    private $requestMessage;
+    private ?RequestInterface $requestMessage = null;
 
     /**
      * Debug
-     *
-     * @var ResponseInterface
      */
-    private $responseMessage;
+    private ?ResponseInterface $responseMessage = null;
 
     public function __construct(array $serviceDefinition, SerializerInterface $serializer, RequestFactoryInterface $messageFactory, StreamFactoryInterface $streamFactory, ClientInterface $client)
     {
