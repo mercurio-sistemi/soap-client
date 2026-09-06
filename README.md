@@ -1,6 +1,6 @@
 # goetas-webservices / soap-client
 
-[![Tests](https://github.com/mercurio-sistemi/soap-client/actions/workflows/tests.yml/badge.svg)](https://github.com/mercurio-sistemi/soap-client/actions/workflows/tests.yml)
+[![Tests](https://github.com/goetas-webservices/soap-client/actions/workflows/tests.yml/badge.svg)](https://github.com/goetas-webservices/soap-client/actions/workflows/tests.yml)
 
 PHP implementation of SOAP 1.1 and 1.2 client specifications.
 
