@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # No "prefer-lowest" job: jms/serializer ^1.6, the lowest allowed floor, uses
+  # "readonly" as an identifier, which PHP 8.1 reserves, so no PHP version
+  # satisfies both that floor and the rest of the constraints.
+  phpunit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - run: composer update --no-interaction --no-progress
+      - run: vendor/bin/phpunit
+
+  phpcs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+      - run: composer update --no-interaction --no-progress
+      # phpcs.xml.dist also points at an absolute path from the original
+      # author's machine (/home/goetas/...), which does not exist on CI, so the
+      # run is limited to the paths that exist in the repository.
+      - run: vendor/bin/phpcs --standard=phpcs.xml.dist src/ tests/
